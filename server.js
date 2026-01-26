@@ -4,10 +4,25 @@ const express = require('express')
 const mongoose = require('mongoose')
 const workoutsRoutes = require('./routes/workouts')
 
+const cors = require("cors");
+
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://habitus-app.netlify.app",
+    "https://*.netlify.app"
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}
+
 // express app
 const app = express()
 
 // middleware
+app.use(cors(corsOptions));
 app.use(express.json())
 
 app.use((req, res, next) => {
