@@ -7,6 +7,10 @@ const habitSchema = new Schema({
     type: String,
     required: true
   },
+  date: {
+    type: String,
+    required: true
+  },
   user_id: {
     type: String,
     required: true

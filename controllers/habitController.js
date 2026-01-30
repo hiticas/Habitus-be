@@ -32,12 +32,16 @@ const getHabit = async (req, res) => {
 
 // create a new habit
 const createHabit = async (req, res) => {
-  const { title, reps, load } = req.body
+  const { title, date } = req.body
 
   let emptyFields = []
 
   if (!title) {
     emptyFields.push('title')
+  }
+
+  if (!date) {
+    emptyFields.push('date')
   }
 
   if (emptyFields.length > 0) {
@@ -47,7 +51,7 @@ const createHabit = async (req, res) => {
   // add doc to db
   try {
     const user_id = req.user._id
-    const habit = await Habit.create({ title, user_id })
+    const habit = await Habit.create({ title, date, user_id })
     res.status(200).json(habit)
   } catch (error) {
     res.status(400).json({ error: error.message })
